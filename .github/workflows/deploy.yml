@@ -27,5 +27,5 @@ jobs:
         DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
       run: |
         npm install -g heroku
-        heroku git:remote -a YOUR_HEROKU_APP_NAME
+        heroku git:remote -a deepl-proxy
         git push heroku main
