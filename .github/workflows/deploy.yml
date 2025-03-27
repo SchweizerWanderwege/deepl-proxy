@@ -24,6 +24,7 @@ jobs:
     - name: Deploy to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
       run: |
         npm install -g heroku
         heroku git:remote -a YOUR_HEROKU_APP_NAME
