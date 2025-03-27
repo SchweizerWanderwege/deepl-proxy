@@ -27,10 +27,10 @@ jobs:
         DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
       run: |
         echo "Installing Heroku CLI"
-        npm install -g heroku
+        curl https://cli-assets.heroku.com/install.sh | sh
         echo "Logging into Heroku"
         echo $HEROKU_API_KEY | heroku auth:token
         echo "Setting remote for Heroku"
         heroku git:remote -a deepl-proxy
         echo "Pushing to Heroku"
-        git push heroku main
+        git push heroku HEAD:master
