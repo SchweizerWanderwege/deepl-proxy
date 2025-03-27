@@ -4,6 +4,8 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
+const allowedOrigins = ['https://schweizerwanderwege.github.io'];
+
 app.use(cors({
     origin: function (origin, callback) {
         // Allow requests with no origin (like mobile apps or curl requests)
@@ -16,6 +18,10 @@ app.use(cors({
     }
 }));
 app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('Welcome to the DeepL Proxy Server');
+});
 
 app.post('/translate', async (req, res) => {
     const { text, targetLang } = req.body;
@@ -34,6 +40,7 @@ app.post('/translate', async (req, res) => {
 
         if (!response.ok) {
             return res.status(response.status).send(await response.text());
+            res.json({ message: 'Translation successful' });
         }
 
         const data = await response.json();
@@ -43,6 +50,8 @@ app.post('/translate', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+
 
 app.listen(port, () => {
     console.log(`Proxy server running at http://localhost:${port}`);
